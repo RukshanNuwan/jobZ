@@ -12,7 +12,15 @@ const Layout = () => {
     DMRegular: require('../assets/fonts/DMSans-Regular.ttf'),
   });
 
-  return <Stack />;
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
+  return <Stack onLayout={onLayoutRootView} />;
 };
 
 export default Layout;
