@@ -14,12 +14,16 @@ import PopularJobCard from '../../common/cards/popular/PopularJobCard';
 import useFetch from '../../../hook/useFetch';
 
 const Popularjobs = () => {
+  const [selectedJob, setSelectedJob] = useState();
+
   const router = useRouter();
 
   const { data, isLoading, error } = useFetch('search', {
     query: 'React Developer',
     num_pages: 1,
   });
+
+  const handlePress = () => {};
 
   return (
     <View style={styles.container}>
@@ -41,7 +45,11 @@ const Popularjobs = () => {
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
             renderItem={(item) => (
-              <PopularJobCard item={item.item} selectedJob handlePress />
+              <PopularJobCard
+                item={item.item}
+                selectedJob={selectedJob}
+                handlePress={handlePress}
+              />
             )}
           />
         )}
