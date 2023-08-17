@@ -32,7 +32,7 @@ const Nearbyjobs = () => {
             <NearbyJobCard
               key={index}
               job={job}
-              handleNavigate={() => router.push(`/job-details/${job.job_id}`)}
+              handleNavigate={() => router.push(`/job_details/${job.job_id}`)}
             />
           ))
         )}
