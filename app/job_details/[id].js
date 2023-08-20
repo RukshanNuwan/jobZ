@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 import { Stack, useRouter, useSearchParams } from 'expo-router';
 
-import { Company, JobTabs, ScreenHeaderBtn } from '../../components';
+import {
+  Company,
+  JobAbout,
+  JobTabs,
+  ScreenHeaderBtn,
+  Specifics,
+} from '../../components';
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
@@ -27,6 +33,28 @@ const JobDetails = () => {
   });
 
   const onRefresh = () => {};
+
+  const displayTabContent = () => {
+    switch (activeTab) {
+      case 'About':
+        return (
+          <JobAbout info={data[0].job_description ?? 'No data provided'} />
+        );
+        break;
+      case 'Qualifications':
+        return (
+          <Specifics
+            title="Qualifications"
+            points={data[0].job_highlights?.Qualifications ?? ['N/A']}
+          />
+        );
+        break;
+      case 'Responsibilities':
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -77,6 +105,7 @@ const JobDetails = () => {
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
               />
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>
