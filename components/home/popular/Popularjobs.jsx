@@ -23,7 +23,10 @@ const Popularjobs = () => {
     num_pages: 1,
   });
 
-  const handlePress = () => {};
+  const handlePress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+    setSelectedJob(item.job_id);
+  };
 
   return (
     <View style={styles.container}>
