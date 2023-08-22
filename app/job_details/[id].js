@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   View,
   SafeAreaView,
@@ -33,7 +33,11 @@ const JobDetails = () => {
     job_id: params.id,
   });
 
-  const onRefresh = () => {};
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -83,12 +87,12 @@ const JobDetails = () => {
       <>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          // refreshControl={
-          //   <RefreshControlComponent
-          //     refreshing={refreshing}
-          //     onRefresh={onRefresh}
-          //   />
-          // }
+          refreshControl={
+            <RefreshControlComponent
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }
         >
           {isLoading ? (
             <ActivityIndicator size="large" color={COLORS.tertiary} />
